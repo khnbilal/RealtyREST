@@ -22,18 +22,18 @@ RealtyREST simplifies real estate management by offering a user-friendly interfa
 ## Tech Stack
 
 - **Frontend:** Next.js, React
-- **Backend:** Spring Boot, Java
-- **Database:** MySQL (hosted on AWS RDS)
-- **Hosting:** AWS EC2, S3, CloudFront
-- **Other Tools:** Docker, Kubernetes, GitHub
 ![Next.js](https://img.shields.io/badge/Next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white)
 ![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
+- **Backend:** Spring Boot, Java
 ![Spring Boot](https://img.shields.io/badge/Spring%20Boot-6DB33F?style=for-the-badge&logo=spring-boot&logoColor=white)
 ![Java](https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=java&logoColor=white)
+- **Database:** MySQL (hosted on AWS RDS)
 ![MySQL](https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=mysql&logoColor=white)
+- **Hosting:** AWS EC2, S3, CloudFront
 ![AWS EC2](https://img.shields.io/badge/AWS%20EC2-FF9900?style=for-the-badge&logo=amazon-aws&logoColor=white)
 ![AWS S3](https://img.shields.io/badge/AWS%20S3-569A31?style=for-the-badge&logo=amazon-s3&logoColor=white)
 ![CloudFront](https://img.shields.io/badge/CloudFront-D7A032?style=for-the-badge&logo=amazon-aws&logoColor=white)
+- **Other Tools:** Docker, Kubernetes, GitHub
 ![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)
 ![Kubernetes](https://img.shields.io/badge/Kubernetes-326CE5?style=for-the-badge&logo=kubernetes&logoColor=white)
 ![GitHub](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white)

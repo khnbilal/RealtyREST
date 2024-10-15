@@ -5,7 +5,7 @@ import axios from 'axios';
 import ReactSlider from 'react-slider';
 import '../../styles/globals.css';
 
-const GOOGLE_MAPS_API_KEY = 'AIzaSyBetqMyj1bavwSU39RiIo0yQhm9qjzz2L8';
+const GOOGLE_MAPS_API_KEY = 'YOUR_API_KEY';
 
 const SearchBar = ({ onSearch }) => {
   const [location, setLocation] = useState('');

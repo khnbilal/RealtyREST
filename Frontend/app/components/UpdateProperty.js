@@ -1,33 +1,47 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-
-const UpdateProperty = ({ id }) => {
-  const [property, setProperty] = useState({});
+import { useState, useEffect } from 'react';
+import '../styles/globals.css';
+const UpdateProperty = ({ selectedProperty, updateProperty }) => {
+  const [property, setProperty] = useState(selectedProperty);
 
   useEffect(() => {
-    // Fetch the existing property by ID
-    axios.get(`http://localhost:8080/api/Realty/${id}`)
-      .then(response => setProperty(response.data))
-      .catch(error => console.error('Error fetching property', error));
-  }, [id]);
+    setProperty(selectedProperty);
+  }, [selectedProperty]);
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    axios.put(`http://localhost:8080/api/Realty/${id}`, property)
-      .then(response => alert('Property updated successfully!'))
-      .catch(error => console.error('Error updating property', error));
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setProperty({ ...property, [name]: value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    updateProperty(property);
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input 
-        type="text" 
-        value={property.address} 
-        onChange={e => setProperty({ ...property, address: e.target.value })}
-      />
-      {/* Add inputs for other fields */}
-      <button type="submit">Update Property</button>
-    </form>
+    <div className="update-property">
+      <h2>Update Property</h2>
+      <form onSubmit={handleSubmit}>
+        <label>Address:</label>
+        <input type="text" name="address" value={property.address} onChange={handleChange} />
+
+        <label>Listing Date:</label>
+        <input type="date" name="listingDate" value={property.listingDate} onChange={handleChange} />
+
+        <label>Property Type:</label>
+        <input type="text" name="propertyType" value={property.propertyType} onChange={handleChange} />
+
+        <label>Bedrooms:</label>
+        <input type="number" name="numberOfBedrooms" value={property.numberOfBedrooms} onChange={handleChange} />
+
+        <label>Bathrooms:</label>
+        <input type="number" name="numberOfBathrooms" value={property.numberOfBathrooms} onChange={handleChange} />
+
+        <label>Home Size (sq ft):</label>
+        <input type="number" name="homeSize" value={property.homeSize} onChange={handleChange} />
+
+        <button type="submit">Update Property</button>
+      </form>
+    </div>
   );
 };
 

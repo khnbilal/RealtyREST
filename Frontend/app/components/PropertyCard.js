@@ -1,18 +1,21 @@
 import React from 'react';
-import Link from 'next/link'; // Add this line to import Link
 
-const PropertyCard = ({ property }) => {
+const PropertyCard = ({ property, handleDelete }) => {
   return (
-    <div className="property-card">
-      <h2>{property.address}</h2>
+    <div className="property-details">
+      <h3>{property.address}</h3>
       <p>Listing Date: {new Date(property.listingDate).toLocaleDateString()}</p>
       <p>Property Type: {property.propertyType}</p>
-      <p>Bedrooms: {property.bedrooms}</p>
-      <p>Bathrooms: {property.bathrooms}</p>
+      <p>Bedrooms: {property.numberOfBedrooms}</p>
+      <p>Bathrooms: {property.numberOfBathrooms}</p>
       <p>Home Size: {property.homeSize} sq ft</p>
-      <Link href={`/update-property?id=${property.id}`}>
-        <button>Update Property</button>
-      </Link>
+      <p>Location: {property.location}</p>
+      <p>Building: {property.building}</p>
+      <p>House/Flat No.: {property.houseFlatNo}</p> {/* New Field Added */}
+      <p>Locality: {property.locality}</p>
+      {property.propertyImage && (
+        <img src={`data:image/jpeg;base64,${property.propertyImage}`} alt={property.address} />
+      )}
       <button onClick={() => handleDelete(property.id)}>Delete Property</button>
     </div>
   );

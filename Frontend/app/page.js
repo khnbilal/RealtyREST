@@ -1,19 +1,30 @@
+"use client"; // Client component declaration
+
 import Link from 'next/link';
 import React from 'react';
-import Navbar from './components/Navbar';
+import SearchBar from './components/SearchBar';
 import '../styles/globals.css';
 
 const Home = () => {
+  const handleSearch = (searchCriteria) => {
+    console.log('Search Criteria:', searchCriteria);
+    // Implement your search logic here, possibly redirecting or fetching filtered properties
+  };
+
   return (
     <div className="home-container">
-      <Navbar /> {/* Add the Navbar here */}
+
+      {/* Search Bar Section */}
+      <div className="search-bar-section">
+        <SearchBar onSearch={handleSearch} />
+      </div>
+
       <div className="hero-section">
         <video autoPlay loop muted className="background-video">
           <source src="/images/video-background.mp4" type="video/mp4" />
           Your browser does not support the video tag.
         </video>
         
-        {/* Wrap heading and description in a section */}
         <section className="text-section">
           <h1 className="bold-text">Welcome to RealtyREST</h1>
           <p className="description bold-text">
@@ -29,6 +40,9 @@ const Home = () => {
           </Link>
           <Link href="/update-property">
             <button className="secondary-button">Update Property</button>
+          </Link>
+          <Link href="/show-properties">
+            <button className="secondary-button">Show All Properties</button>
           </Link>
         </div>
       </div>

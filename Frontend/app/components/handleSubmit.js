@@ -1,4 +1,6 @@
-const handleSubmit = async (event) => {
+import { addProperty } from './apiService'; // Ensure correct import path
+
+const handleSubmit = async (event, property) => {
     event.preventDefault(); // Prevent the default form submission
 
     // Function to convert DD-MM-YYYY to YYYY-MM-DD
@@ -7,36 +9,48 @@ const handleSubmit = async (event) => {
         return `${year}-${month}-${day}`; // Return in YYYY-MM-DD format
     };
 
-    const formData = {
-        address: addressInput.value,
-        listingDate: formatDate(listingDateInput.value), // Convert date format
-        propertyType: propertyTypeInput.value,
-        numberOfBedrooms: parseInt(bedroomsInput.value),
-        numberOfBathrooms: parseInt(bathroomsInput.value),
-        homeSize: parseFloat(homeSizeInput.value)
-    };
+    // Validate property data
+    if (
+        !property.location ||
+        !property.building ||
+        !property.locality ||
+        !property.listingDate ||
+        !property.propertyType ||
+        property.numberOfBedrooms === undefined ||
+        property.numberOfBathrooms === undefined ||
+        property.homeSize === undefined ||
+        property.price === undefined ||
+        !property.images || property.images.length === 0
+    ) {
+        alert('Please fill all fields correctly.');
+        return;
+    }
+
+    // Prepare FormData
+    const formData = new FormData();
+    formData.append('location', property.location);
+    formData.append('building', property.building);
+    formData.append('locality', property.locality);
+    formData.append('listingDate', formatDate(property.listingDate));
+    formData.append('propertyType', property.propertyType);
+    formData.append('numberOfBedrooms', parseInt(property.numberOfBedrooms));
+    formData.append('numberOfBathrooms', parseInt(property.numberOfBathrooms));
+    formData.append('homeSize', parseFloat(property.homeSize));
+    formData.append('price', parseFloat(property.price));
+
+    // Append images to FormData
+    for (let i = 0; i < property.images.length; i++) {
+        formData.append('images', property.images[i]);
+    }
 
     try {
-        const response = await fetch('http://localhost:8080/api/Realty', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(formData)
-        });
-
-        if (response.ok) {
-            const newProperty = await response.json();
-            console.log('Property added:', newProperty);
-            // Optionally, reset form fields or update UI
-        } else {
-            const errorResponse = await response.json();
-            console.error('Error adding property:', errorResponse);
-            alert('Failed to add property: ' + errorResponse.message);
-        }
+        const newProperty = await addProperty(formData); // Use the addProperty method with FormData
+        console.log('Property added:', newProperty);
+        // Optionally, reset form fields or update UI here
     } catch (error) {
-        console.error('Network error:', error);
+        console.error('Error adding property:', error);
+        alert('Failed to add property: ' + error.message);
     }
 };
 
-
+export default handleSubmit;
